@@ -2,18 +2,18 @@ package domain
 
 import "context"
 
-type LoginRequest struct {
-	Email    string `form:"email" binding:"required,email"`
-	Password string `form:"password" binding:"required"`
+type RefreshTokenRequest struct {
+	RefreshToken string `form:"refreshToken" binding:"required"`
 }
 
-type LoginResponse struct {
+type RefreshTokenResponse struct {
 	AccessToken  string `json:"accessToken"`
 	RefreshToken string `json:"refreshToken"`
 }
 
-type LoginUsecase interface {
-	GetUserByEmail(c context.Context, email string) (User, error)
+type RefreshTokenUsecase interface {
+	GetUserByID(c context.Context, id string) (User, error)
 	CreateAccessToken(user *User, secret string, expiry int) (accessToken string, err error)
 	CreateRefreshToken(user *User, secret string, expiry int) (refreshToken string, err error)
+	ExtractIDFromToken(requestToken string, secret string) (string, error)
 }
