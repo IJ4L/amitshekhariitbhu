@@ -45,6 +45,6 @@ jobs:
           script: |
             whoami
             sudo su
-            docker stop api-tengah-malam || true && docker rm api-tengah-malam || true
+            docker stop clean_architecture || true && docker rm clean_architecture || true
             docker pull ${{ vars.IMAGE_NAME }}
             docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
