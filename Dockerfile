@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY . .
 
+WORKDIR /app/cmd
+
 RUN go mod tidy
 
 RUN go build -o binary
