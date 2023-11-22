@@ -15,7 +15,7 @@ func main() {
 
 	db := app.MySQL.DB
 
-	db.AutoMigrate(&domain.User{})
+	db.AutoMigrate(&domain.User{}, &domain.Task{})
 
 	defer app.CloseDBConnection()
 
