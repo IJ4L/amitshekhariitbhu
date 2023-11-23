@@ -30,6 +30,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.CONTAINER_NAME }}:latest
 
+          
   deployment:
     needs: build
     environment: main
