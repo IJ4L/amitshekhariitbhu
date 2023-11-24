@@ -24,7 +24,7 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	viper.SetConfigFile("boostrap.env")
+	viper.SetConfigFile("boostrap/.env")
 
 	err := viper.ReadInConfig()
 	if err != nil {
