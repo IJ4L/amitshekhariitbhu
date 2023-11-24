@@ -45,6 +45,10 @@ jobs:
           script: |
             whoami
             sudo su
+
+            export DB_HOST=mydatabasehost
+            export DB_PORT=3306
+
             docker stop clean_architecture || true && docker rm clean_architecture || true
             docker pull ${{ vars.IMAGE_NAME }}
             docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}

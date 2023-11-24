@@ -24,7 +24,15 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	viper.SetConfigFile("app/.env")
+	viper.AutomaticEnv() // Otomatis membaca variabel lingkungan
+
+	// Membaca nilai variabel lingkungan menggunakan Viper
+	dbHost := viper.GetString("DB_HOST")
+	dbPort := viper.GetString("DB_PORT")
+
+	// Menampilkan nilai variabel lingkungan
+	fmt.Printf("DB_HOST: %s\n", dbHost)
+	fmt.Printf("DB_PORT: %s\n", dbPort)
 
 	err := viper.ReadInConfig()
 	if err != nil {
