@@ -3,7 +3,6 @@ package bootstrap
 import (
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/spf13/viper"
 )
@@ -25,11 +24,7 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-
-	fmt.Printf("DB_HOST: %s\n", dbHost)
-	fmt.Printf("DB_PORT: %s\n", dbPort)
+	viper.SetConfigFile("./.env")
 
 	err := viper.ReadInConfig()
 	if err != nil {
