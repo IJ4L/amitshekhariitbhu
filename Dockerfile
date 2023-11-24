@@ -4,6 +4,10 @@ RUN apk update && apk add --no-cache git
 
 WORKDIR /app
 
+COPY --from=build-env .env /app
+
+COPY .env /app
+
 COPY . .
 
 WORKDIR /app/cmd
