@@ -3,6 +3,8 @@ package bootstrap
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/spf13/viper"
 )
@@ -24,9 +26,19 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	viper.SetConfigFile("boostrap/.env")
+	
+	dir, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Tidak dapat mendapatkan working directory:", err)
+	}
 
-	err := viper.ReadInConfig()
+	// Gabungkan direktori saat ini dengan path relatif ke file konfigurasi
+	configFilePath := filepath.Join(dir, "bootstrap", ".env")
+
+	// Mengatur lokasi file konfigurasi
+	viper.SetConfigFile(configFilePath)
+
+	err = viper.ReadInConfig()
 	if err != nil {
 		log.Fatal("Can't find the file .env : ", err)
 	}
