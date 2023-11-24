@@ -32,6 +32,8 @@ func NewEnv() *Env {
 		fmt.Println("Tidak dapat mendapatkan working directory:", err)
 	}
 
+	fmt.Println(dir)
+
 	// Gabungkan direktori saat ini dengan path relatif ke file konfigurasi
 	configFilePath := filepath.Join(dir, "bootstrap", ".env")
 
