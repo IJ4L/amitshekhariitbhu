@@ -51,6 +51,6 @@ jobs:
             docker container ls -a
             docker container logs -f ${{ vars.CONTAINER_NAME }}
 
-            ls
-            pwd
+            sudo ls
+            sudo pwd
 
