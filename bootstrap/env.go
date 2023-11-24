@@ -24,7 +24,7 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	viper.SetConfigFile("D:/golang/architecture_again/.env")
+	viper.SetConfigFile("boostrap.env")
 
 	err := viper.ReadInConfig()
 	if err != nil {
