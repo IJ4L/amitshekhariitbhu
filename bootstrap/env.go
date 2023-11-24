@@ -26,15 +26,6 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	dir, err := os.Getwd()
-	if err != nil {
-		fmt.Println("Tidak dapat mendapatkan working directory:", err)
-	}
-
-	fmt.Println(dir)
-
-	// Jika aplikasi berjalan dalam lingkungan Docker, dapatkan working directory aplikasi dalam container
-	// (misalnya, "/app" jika binary aplikasi berada di direktori "/app")
 	containerAppDirectory := "/app" // Gantilah dengan working directory sesuai dengan struktur direktori di dalam container
 	dirInContainer := filepath.Join(containerAppDirectory, "bootstrap")
 
@@ -45,7 +36,7 @@ func NewEnv() *Env {
 	viper.SetConfigFile(configFilePath)
 
 	// Baca konfigurasi dari file
-	err = viper.ReadInConfig()
+	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Println("Tidak dapat membaca file konfigurasi:", err)
 	}
