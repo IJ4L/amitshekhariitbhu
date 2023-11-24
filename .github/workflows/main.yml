@@ -51,7 +51,7 @@ jobs:
 
             docker stop clean_architecture || true && docker rm clean_architecture || true
             docker pull ${{ vars.IMAGE_NAME }}
-            docker run -d -p 9090:9090 -e DB_HOST=mydatabasehost -e DB_PORT=3306 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
+            docker run -d -p 9090:9090 --env-file /root/snap/file.env--name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
             docker container ls -a
             docker container logs -f ${{ vars.CONTAINER_NAME }}
 
