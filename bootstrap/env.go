@@ -3,6 +3,8 @@ package bootstrap
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/spf13/viper"
 )
@@ -24,11 +26,28 @@ type Env struct {
 
 func NewEnv() *Env {
 	env := Env{}
-	viper.SetConfigFile("../boostrap/.env")
-
-	err := viper.ReadInConfig()
+	dir, err := os.Getwd()
 	if err != nil {
-		log.Fatal("Can't find the file .env : ", err)
+		fmt.Println("Tidak dapat mendapatkan working directory:", err)
+	}
+
+	fmt.Println(dir)
+
+	// Jika aplikasi berjalan dalam lingkungan Docker, dapatkan working directory aplikasi dalam container
+	// (misalnya, "/app" jika binary aplikasi berada di direktori "/app")
+	containerAppDirectory := "/app" // Gantilah dengan working directory sesuai dengan struktur direktori di dalam container
+	dirInContainer := filepath.Join(containerAppDirectory, "bootstrap")
+
+	// Gabungkan direktori dalam container dengan path relatif ke file konfigurasi
+	configFilePath := filepath.Join(dirInContainer, ".env")
+
+	// Mengatur lokasi file konfigurasi
+	viper.SetConfigFile(configFilePath)
+
+	// Baca konfigurasi dari file
+	err = viper.ReadInConfig()
+	if err != nil {
+		fmt.Println("Tidak dapat membaca file konfigurasi:", err)
 	}
 
 	err = viper.Unmarshal(&env)
