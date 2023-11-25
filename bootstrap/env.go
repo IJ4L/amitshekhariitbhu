@@ -3,10 +3,6 @@ package bootstrap
 import (
 	"fmt"
 	"log"
-	"os"
-	"path/filepath"
-
-	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
 
@@ -26,17 +22,10 @@ type Env struct {
 }
 
 func NewEnv() *Env {
-
-	path, _ := os.Getwd()
-    err := godotenv.Load(filepath.Join(path, ".env"))
-    if err != nil {
-        log.Fatal("Error loading .env file")
-    }
-
 	env := Env{}
-	viper.SetConfigFile("./.env")
+	viper.SetConfigFile("../.env")
 
-	err = viper.ReadInConfig()
+	err := viper.ReadInConfig()
 	if err != nil {
 		log.Fatal("Can't find the file .env : ", err)
 	}
