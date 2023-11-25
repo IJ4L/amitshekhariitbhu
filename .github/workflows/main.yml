@@ -49,8 +49,8 @@
               docker stop clean_architecture || true && docker rm clean_architecture || true
               docker pull ${{ vars.IMAGE_NAME }}
 
-              docker-compose -f .\docker-compose.yaml up -d
-              docker-compose -f .\docker-compose.yaml ls
+              docker-compose -f \app\docker-compose.yaml up -d
+              docker-compose -f \app\docker-compose.yaml ls
 
               docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
               docker container ls -a
