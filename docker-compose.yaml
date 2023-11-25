@@ -6,10 +6,10 @@ services:
     ports:
       - "6603:3306"
     environment:
-      MYSQL_DATABASE: your_database_name
-      MYSQL_USER: your_database_user
-      MYSQL_PASSWORD: your_database_password
-      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: bioskop
+      MYSQL_USER: ijulll
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: 123
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -19,7 +19,7 @@ services:
     restart: always
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_ROOT_PASSWORD: 123
     ports:
       - "8080:80"
     networks:
