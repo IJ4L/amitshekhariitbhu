@@ -49,6 +49,7 @@
               docker stop clean_architecture || true && docker rm clean_architecture || true
               docker pull ${{ vars.IMAGE_NAME }}
 
+              cd /app
               docker compose up -d
               docker compose ls
 
