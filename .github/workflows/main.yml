@@ -46,10 +46,11 @@ jobs:
             whoami
             sudo su
 
-            docker compose up -d
-
             docker stop clean_architecture || true && docker rm clean_architecture || true
             docker pull ${{ vars.IMAGE_NAME }}
+
+            docker compose up -d
+
             docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
             docker container ls -a
             docker container logs -f ${{ vars.CONTAINER_NAME }}
