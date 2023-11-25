@@ -49,6 +49,8 @@ jobs:
             docker stop clean_architecture || true && docker rm clean_architecture || true
             docker pull ${{ vars.IMAGE_NAME }}
 
+            cd ..
+
             docker compose up -d
             docker compoes ls
 
