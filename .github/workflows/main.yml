@@ -50,6 +50,7 @@ jobs:
             docker pull ${{ vars.IMAGE_NAME }}
 
             docker compose up -d
+            docker compoes ls
 
             docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
             docker container ls -a
