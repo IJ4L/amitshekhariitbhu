@@ -49,6 +49,8 @@
               docker stop clean_architecture || true && docker rm clean_architecture || true
               docker pull ${{ vars.IMAGE_NAME }}
 
+              ls -l
+
               docker-compose -f docker-compose.yaml up -d
               docker-compose -f docker-compose.yaml ls
 
