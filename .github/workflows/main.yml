@@ -27,6 +27,10 @@
             file: ./Dockerfile
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.CONTAINER_NAME }}:latest
+        
+        - name: Deploy using Docker Compose
+          run: |
+              docker-compose -f docker-compose.yml up -d
 
     deployment:
       needs: build
