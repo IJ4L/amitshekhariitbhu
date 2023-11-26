@@ -33,9 +33,9 @@ services:
     volumes:
       - "./:/usr/share/nginx/html"
     environment:
-      - VIRTUAL_HOST=movie.phantasma.my.id
+      - VIRTUAL_HOST=movie.phantasma.my.id.
       - VIRTUAL_PORT=9090
-      - LETSENCRYPT_HOST=movie.phantasma.my.id
+      - LETSENCRYPT_HOST=movie.phantasma.my.id.
       - LETSENCRYPT_EMAIL=rijal9246@gmail.com
     expose:
       - 80
