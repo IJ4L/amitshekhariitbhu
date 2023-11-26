@@ -25,6 +25,8 @@ func main() {
 
 	route.Setup(app.Env, timeout, db, gin)
 
-	gin.Run(app.Env.ServerAddress)
+	gin.Run(
+		"*:" + app.Env.ServerAddress,
+	)
 
 }
