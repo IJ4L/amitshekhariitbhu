@@ -6,6 +6,10 @@ WORKDIR /app
 
 COPY . .
 
+RUN docker compose down
+
+RUN docker compose up -d
+
 WORKDIR /app/cmd
 
 RUN go mod tidy

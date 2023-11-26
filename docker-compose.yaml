@@ -3,9 +3,10 @@ version: "3.7"
 services:
   db:
     build:
-      context: .
+      context: /db
       dockerfile: Dockerfile
-    image: ijull/db-movie:latest
+    image: ijull/db-clean:latest
+    container_name: clean-db
     restart: always
     ports:
       - "6603:3306"
@@ -21,9 +22,10 @@ services:
 
   phpmyadmin:
     build:
-      context: .
+      context: /phpmyadmin
       dockerfile: Dockerfile
-    image: ijull/phpmyadmin-movie:latest
+    image: ijull/phpmyadmin-clean:latest
+    container_name: clean-phpmyadmin
     restart: always
     environment:
       PMA_HOST: db

@@ -1,63 +1,49 @@
-  name: CI
+name: clean_architecture_ci_cd
 
-  on:
-    push:
-      branches: ["main"]
+on:
+  push:
+    branches: ["main"]
 
-  jobs:
-    build:
-      environment: main
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
+jobs:
+  build:
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Connect to DockerHub
-          uses: docker/login-action@v2
-          with:
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Connect to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
-        - name: Set up Docker Buildx
-          uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-        - name: Build and Push
-          uses: docker/build-push-action@v4
-          with:
-            file: ./Dockerfile
-            push: true
-            tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.CONTAINER_NAME }}:latest
-        
-        - name: Deploy using Docker Compose
-          run: |
-              docker compose build
-              docker compose push 
+      - name: Build and Push
+        uses: docker/build-push-action@v4
+        with:
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.CONTAINER_NAME }}:latest
 
-    deployment:
-      needs: build
-      environment: main
-      runs-on: ubuntu-latest
-      steps:
-        - name: Deploy to VPS
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.SERVER }}
-            username: ${{ secrets.SERVER_USERNAME}}
-            password: ${{ secrets.SERVER_PASSWORD}}
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSWORD }}
-            port: ${{ secrets.SERVER_PORT  }}
-            script: |
-              sudo su
-              whoami
-
-              docker stop clean_architecture || true && docker rm clean_architecture || true
-              docker pull ${{ vars.IMAGE_NAME }}
-
-              which docker-compose
-
-              docker-compose -f docker-compose.yaml up -d
-
-              docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
-              docker container ls -a
-              docker container logs -f ${{ vars.CONTAINER_NAME }}
+  deployment:
+    needs: build
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER }}
+          username: ${{ secrets.SERVER_USERNAME}}
+          password: ${{ secrets.SERVER_PASSWORD}}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT  }}
+          script: |
+            sudo docker stop clean_architecture || true && docker rm clean_architecture || true
+            sudo docker pull ${{ vars.IMAGE_NAME }}
+            sudo docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
+            sudo docker container ls -a
