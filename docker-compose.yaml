@@ -1,7 +1,8 @@
 version: "3.7"
+
 services:
   db:
-    image: mysql:latest
+    image: ijull/mysql:latest
     restart: always
     ports:
       - "6603:3306"
@@ -16,7 +17,7 @@ services:
       - app-network
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: ijull/phpmyadmin:latest
     restart: always
     environment:
       PMA_HOST: db
@@ -32,21 +33,17 @@ services:
     volumes:
       - "./:/usr/share/nginx/html"
     environment:
-      # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
       - VIRTUAL_HOST=movie.phantasma.my.id
       - VIRTUAL_PORT=9090
       - LETSENCRYPT_HOST=movie.phantasma.my.id
       - LETSENCRYPT_EMAIL=rijal9246@gmail.com
-      # /END NGINX-PROXY ENVIRONMENT VARIABLES
     expose:
       - 80
 
 networks:
   app-network:
     driver: bridge
-  default:
-    external:
-      name: nginx-proxy
+    name: nginx-proxy
 
 volumes:
   db_data:
