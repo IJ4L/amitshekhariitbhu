@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   db:
-    image: ijull/mysql:latest
+    image: mysql:latest
     restart: always
     ports:
       - "6603:3306"
@@ -17,7 +17,7 @@ services:
       - app-network
 
   phpmyadmin:
-    image: ijull/phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin:latest
     restart: always
     environment:
       PMA_HOST: db
@@ -47,3 +47,4 @@ networks:
 
 volumes:
   db_data:
+
