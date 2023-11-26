@@ -43,11 +43,14 @@ jobs:
           passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSWORD }}
           port: ${{ secrets.SERVER_PORT  }}
           script: |
+            cd golang
+            sudo mkdir clean-architecture
+            cd clean-architecture
 
-            sudo mkdir /golang/clean-architecture
             wget https://raw.githubusercontent.com/IJ4L/amitshekhariitbhu/main/docker-compose.yaml
-            sudo docker compose -f /golang/clean-architecture/docker-compose.yaml down
-            sudo docker compose -f /golang/clean-architecture/docker-compose.yaml up -d
+            sudo docker compose down
+            sudo docker compose up -d
+            sudo docker compose ls
 
             sudo docker stop clean_architecture || true && docker rm clean_architecture || true
             sudo docker pull ${{ vars.IMAGE_NAME }}
