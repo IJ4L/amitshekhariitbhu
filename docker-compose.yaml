@@ -28,7 +28,7 @@ services:
       - app-network
 
   nginx:
-    image: ijull/nginx-proxy:latest
+    image: nginx
     restart: always
     volumes:
       - "./:/usr/share/nginx/html"
