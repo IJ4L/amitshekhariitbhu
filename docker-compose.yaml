@@ -1,12 +1,7 @@
 version: "3.7"
-
 services:
   db:
-    build:
-      context: /db
-      dockerfile: Dockerfile
-    image: ijull/db-clean:latest
-    container_name: clean-db
+    image: mysql:latest
     restart: always
     ports:
       - "6603:3306"
@@ -21,11 +16,7 @@ services:
       - app-network
 
   phpmyadmin:
-    build:
-      context: /phpmyadmin
-      dockerfile: Dockerfile
-    image: ijull/phpmyadmin-clean:latest
-    container_name: clean-phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     restart: always
     environment:
       PMA_HOST: db
@@ -34,10 +25,8 @@ services:
       - "8080:80"
     networks:
       - app-network
-
 networks:
   app-network:
     driver: bridge
-
 volumes:
   db_data:

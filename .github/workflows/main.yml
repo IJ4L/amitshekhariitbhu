@@ -48,6 +48,7 @@ jobs:
             cd clean-architecture
 
             whoami
+            rm -rf docker-compose.yaml
 
             sudo wget https://raw.githubusercontent.com/IJ4L/amitshekhariitbhu/main/docker-compose.yaml
             sudo docker compose down
