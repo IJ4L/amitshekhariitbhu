@@ -1,7 +1,11 @@
 version: "3.7"
+
 services:
   db:
-    image: mysql:latest
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    image: ijull/db-movie:latest
     restart: always
     ports:
       - "6603:3306"
@@ -14,8 +18,12 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - app-network
+
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    build:
+      context: ./phpmyadmin
+      dockerfile: Dockerfile
+    image: ijull/phpmyadmin-movie:latest
     restart: always
     environment:
       PMA_HOST: db
@@ -24,8 +32,10 @@ services:
       - "8080:80"
     networks:
       - app-network
+
 networks:
   app-network:
     driver: bridge
+
 volumes:
   db_data:
