@@ -44,11 +44,9 @@ jobs:
           port: ${{ secrets.SERVER_PORT  }}
           script: |
             cd golang
+            rm -rf clean-architecture
             sudo mkdir clean-architecture
             cd clean-architecture
-
-            whoami
-            rm -rf docker-compose.yaml
 
             sudo wget https://raw.githubusercontent.com/IJ4L/amitshekhariitbhu/main/docker-compose.yaml
             sudo docker compose down
