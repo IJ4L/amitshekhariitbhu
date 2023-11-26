@@ -3,7 +3,7 @@ version: "3.7"
 services:
   db:
     build:
-      context: ./db
+      context: .
       dockerfile: Dockerfile
     image: ijull/db-movie:latest
     restart: always
@@ -21,7 +21,7 @@ services:
 
   phpmyadmin:
     build:
-      context: ./phpmyadmin
+      context: .
       dockerfile: Dockerfile
     image: ijull/phpmyadmin-movie:latest
     restart: always
