@@ -25,8 +25,28 @@ services:
       - "8080:80"
     networks:
       - app-network
+
+  nginx:
+    image: ijull/nginx-proxy:latest
+    restart: always
+    volumes:
+      - "./:/usr/share/nginx/html"
+    environment:
+      # NGINX-PROXY ENVIRONMENT VARIABLES: UPDATE ME
+      - VIRTUAL_HOST=movie.phantasma.my.id
+      - VIRTUAL_PORT=9090
+      - LETSENCRYPT_HOST=movie.phantasma.my.id
+      - LETSENCRYPT_EMAIL=rijal9246@gmail.com
+      # /END NGINX-PROXY ENVIRONMENT VARIABLES
+    expose:
+      - 80
+
 networks:
   app-network:
     driver: bridge
+  default:
+    external:
+      name: nginx-proxy
+
 volumes:
   db_data:
