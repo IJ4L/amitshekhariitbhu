@@ -28,6 +28,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ vars.CONTAINER_NAME }}:latest
 
+          
   deployment:
     needs: build
     environment: main
@@ -46,5 +47,5 @@ jobs:
             sudo docker stop clean_architecture || true && docker rm clean_architecture || true
             sudo docker pull ${{ vars.IMAGE_NAME }}
             sudo docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
-            
+
             ls
