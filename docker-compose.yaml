@@ -23,28 +23,12 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: 123
     ports:
-      - "8080:80"
+      - "8081:80"
     networks:
       - app-network
-
-  nginx:
-    image: nginx
-    restart: always
-    volumes:
-      - "./:/usr/share/nginx/html"
-    environment:
-      - VIRTUAL_HOST=movie.phantasma.my.id.
-      - VIRTUAL_PORT=9090
-      - LETSENCRYPT_HOST=movie.phantasma.my.id.
-      - LETSENCRYPT_EMAIL=rijal9246@gmail.com
-    expose:
-      - 80
 
 networks:
   app-network:
     driver: bridge
-    external:
-      name: nginx-proxy
-
 volumes:
   db_data:
