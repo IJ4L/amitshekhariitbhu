@@ -14,7 +14,7 @@ type Client struct {
 }
 
 func NewMySQLDatabase(env *Env) *Client {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", env.User, env.Password, env.Host, env.Port, env.Database)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/clean?charset=utf8mb4&parseTime=True&loc=Local", env.User, env.Password, env.Host, env.Port, env.Database)
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
