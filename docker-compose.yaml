@@ -7,7 +7,7 @@ services:
     ports:
       - "6603:3306"
     environment:
-      MYSQL_DATABASE: clean
+      MYSQL_DATABASE: bioskop
       MYSQL_USER: ijulll
       MYSQL_PASSWORD: 123
       MYSQL_ROOT_PASSWORD: 123
@@ -30,5 +30,6 @@ services:
 networks:
   app-network:
     driver: bridge
+
 volumes:
   db_data:
