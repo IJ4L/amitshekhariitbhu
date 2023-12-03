@@ -25,9 +25,6 @@ func main() {
 
 	route.Setup(app.Env, timeout, db, gin)
 
-	err := gin.RunTLS(app.Env.ServerAddress, "../certs/server.crt", "../certs/server.key")
-	if err != nil {
-		panic(err)
-	}
+	gin.Run(app.Env.ServerAddress)
 
 }
