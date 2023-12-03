@@ -54,7 +54,7 @@ jobs:
             sudo docker compose up -d
             sudo docker compose ls
 
-            sudo docker stop clean_architecture || true && docker rm clean_architecture || true
+            sudo docker stop clean_architecture || true && sudo docker rm clean_architecture || true
             sudo docker pull ${{ vars.IMAGE_NAME }}
             sudo docker run -d -p 9090:9090 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}
             sudo docker container ls -a
