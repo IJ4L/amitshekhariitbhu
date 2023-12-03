@@ -1,7 +1,6 @@
 package bootstrap
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/spf13/viper"
@@ -35,8 +34,6 @@ func NewEnv() *Env {
 	if err != nil {
 		log.Fatal("Environment can't be loaded: ", err)
 	}
-
-	fmt.Println()
 
 	if env.AppEnv == "development" {
 		log.Println("The App is running in development env")
